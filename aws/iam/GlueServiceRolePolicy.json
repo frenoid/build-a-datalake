@@ -1,0 +1,85 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DeleteTags",
+                "ec2:CreateTags"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:security-group/*",
+                "arn:aws:ec2:*:*:network-interface/*"
+            ],
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": "aws-glue-service-resource"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "cloudwatch:PutMetricData",
+                "ec2:DeleteNetworkInterface",
+                "s3:ListBucket",
+                "s3:GetBucketAcl",
+                "ec2:DescribeVpcAttribute",
+                "glue:*",
+                "ec2:DescribeSecurityGroups",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "s3:ListAllMyBuckets",
+                "ec2:DescribeVpcEndpoints",
+                "iam:ListRolePolicies",
+                "ec2:DescribeSubnets",
+                "iam:GetRolePolicy",
+                "ec2:DescribeRouteTables",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:CreateBucket",
+                "logs:AssociateKmsKey",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-glue-*",
+                "arn:aws:logs:*:*:/aws-glue/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*/*aws-glue-*/*",
+                "arn:aws:s3:::aws-glue-*/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": [
+                "arn:aws:s3:::crawler-public*",
+                "arn:aws:s3:::aws-glue-*"
+            ]
+        }
+    ]
+}
